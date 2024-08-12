@@ -1,3 +1,26 @@
-baseURL = 'https://mugraph.dev/'
+baseURL = "https://mugraph.dev/"
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = "mugraph"
+theme = "kayal"
+paginate = 5
+enableEmoji = true
+enableRobotsTXT = true
+
+# Length of default summaries.
+summaryLength = 0
+
+# Build drafts during site generation.
+buildDrafts = false
+# Build pages with future dates during site generation.
+buildFuture = false
+
+# Sitemap setting
+[sitemap]
+  changefreq = 'weekly'
+  filename = 'sitemap.xml'
+  priority = 0.5
+
+# Google Analytics Configuration
+# [services]
+#   [services.googleAnalytics]
+#     ID = 'G-MEASUREMENT_ID'
