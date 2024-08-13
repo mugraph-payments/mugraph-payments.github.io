@@ -6,7 +6,7 @@
   --tertiary-color: #44475a;
   --link-color: #449DD1;
   --tertiary-color-light: #6272a4;
-  --secondary-color-dark: #DFDFCD;
+  --secondary-color-dark: #44475a;
   --black: #292929;
   --code-bg: #272822; /*Monokai*/
   --code-fg: #f8f8f2; /*Monokai*/
@@ -20,7 +20,7 @@
   --secondary-color: #292929;
   --tertiary-color: #44475a;
   --tertiary-color-light: #6272a4;
-  --secondary-color-dark: #3D3D29;
+  --secondary-color-dark: #44475a;
   --scrollbar-track: #292929;
   --scrollbar-thumb: #525252;
 }
