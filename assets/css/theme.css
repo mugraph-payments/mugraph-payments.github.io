@@ -3,9 +3,9 @@
   --radius: 6px;
   --primary-color: #292929;
   --secondary-color: #EFEFE6;
-  --tertiary-color: #E0002D;
+  --tertiary-color: #44475a;
   --link-color: #449DD1;
-  --tertiary-color-light: #FFB370;
+  --tertiary-color-light: #6272a4;
   --secondary-color-dark: #DFDFCD;
   --black: #292929;
   --code-bg: #272822; /*Monokai*/
@@ -18,8 +18,8 @@
 .dark {
   --primary-color: #EFEFE6;
   --secondary-color: #292929;
-  --tertiary-color: #FF7F11;
-  --tertiary-color-light: #A34C00;
+  --tertiary-color: #44475a;
+  --tertiary-color-light: #6272a4;
   --secondary-color-dark: #3D3D29;
   --scrollbar-track: #292929;
   --scrollbar-thumb: #525252;

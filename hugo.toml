@@ -24,3 +24,6 @@ buildFuture = false
 # [services]
 #   [services.googleAnalytics]
 #     ID = 'G-MEASUREMENT_ID'
+
+[taxonomies]
+tags = "tags"

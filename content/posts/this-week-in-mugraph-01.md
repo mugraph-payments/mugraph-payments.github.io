@@ -2,6 +2,7 @@
 title = 'This Week in Mugraph 01'
 date = 2024-08-13T10:00:00-03:00
 draft = false
+tags = ["this-week-in-mugraph"]
 +++
 
 Hello, and welcome to the first issue of *This Week in Mugraph*, an update on what is cooking, either from my side or from the community.
