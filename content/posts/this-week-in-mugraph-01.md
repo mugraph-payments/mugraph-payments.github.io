@@ -13,7 +13,7 @@ Being the first one, it only seems pertinent to answer the question many people 
 
 Mugraph is an open-source eletronic cash protocol for Cardano, based on a variant of the *Chaumian Ecash* scheme, proposed by David Chaum in his 1983 paper [*Blind Signatures for Untraceable Payments*](http://www.hit.bme.hu/~buttyan/courses/BMEVIHIM219/2009/Chaum.BlindSigForPayment.1982.PDF).
 
-A ecash is a *Bearer Token*, an **obligation** from a Bank (usually called a *Mint* in Chaumian Ecash protocols) to pay anyone holding the token a certain amount of money, or in our case, Cardano native assets.
+An ecash is a *Bearer Token*, an **obligation** from a Bank (usually called a *Mint* in Chaumian Ecash protocols) to pay anyone holding the token a certain amount of money, or in our case, Cardano native assets.
 
 Mugraph is fast, with instant transactions and settlement, and safeguards user privacy via *unlinkability* and *group concealing*, meaning:
 
@@ -36,7 +36,7 @@ There are two drawbacks to this approach that we aim to cover:
 
 Mugraph solves these problems with the use of Zero-Knowledge Proofs, which allow some very nice properties:
 
-* Unlike Ecashes, assets in Mugraph (called *Mus*) can be splitted and joined off-line, through the use of [ZK-SNARKS](https://z.cash/learn/what-are-zk-snarks/). This process also allows us to hide any information about what is being transacted, while the Mint can still be sure that all notes it is receiving is valid.
+* Unlike Ecashes, assets in Mugraph (called *Mus*) can be split and joined off-line, through the use of [ZK-SNARKS](https://z.cash/learn/what-are-zk-snarks/). This process also allows us to hide any information about what is being transacted, while the Mint can still be sure that all notes it is receiving is valid.
 * Mus can themselves have **Programs**, arbitrary computations on **Datums** to allow this Mu to be spent, using the [Risc0 VM](https://risczero.com).
 
 The goal is: we want to make Cardano the best chain for real-world payments, with no close second.
