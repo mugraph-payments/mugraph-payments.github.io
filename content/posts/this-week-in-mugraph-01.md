@@ -59,4 +59,8 @@ After v0.1, I'm going to release the Mugraph whitepaper, which will explain the 
 
 The work for this has already been started, with [mugraph-simulator](https://github.com/mugraph-payments/mugraph/tree/main/simulator) for deterministic simulation of clients and servers.
 
-This is it for this week! See you guys next Wednesday. And if you have any questions, or want to follow the project, [hit me up on X](https://x.com/cfcosta_)!
+This is it for this week! See you guys next Wednesday. And if you have any questions, or want to follow the project:
+
+- [Hit me up on X!](https://x.com/cfcosta_)!
+- [Join Our Discord](https://discord.gg/RPS8RgfWna)
+- [See the code](https://github.com/mugraph-payments/mugraph)
