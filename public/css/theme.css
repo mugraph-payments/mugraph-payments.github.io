@@ -1,26 +1,26 @@
 :root{
   --ff: 'Ubuntu';
   --radius: 6px;
-  --primary-color: #292929;
+  --primary-color: #282A36;
   --secondary-color: #EFEFE6;
   --tertiary-color: #E0002D;
   --link-color: #449DD1;
   --tertiary-color-light: #FFB370;
   --secondary-color-dark: #DFDFCD;
   --black: #292929;
-  --code-bg: #272822; /*Monokai*/
-  --code-fg: #f8f8f2; /*Monokai*/
+  --code-bg: #44475a;
+  --code-fg: #f8f8f2;
   --code-scroll-thumb: #525252;
   --scrollbar-track: #EFEFE6;
   --scrollbar-thumb: #B7B78F;
 }
 
 .dark {
-  --primary-color: #EFEFE6;
-  --secondary-color: #292929;
-  --tertiary-color: #FF7F11;
+  --primary-color: #f8f8f2;
+  --secondary-color: #282a36;
+  --tertiary-color: #bd93f9;
   --tertiary-color-light: #A34C00;
-  --secondary-color-dark: #3D3D29;
+  --secondary-color-dark: #44475a;
   --scrollbar-track: #292929;
   --scrollbar-thumb: #525252;
 }
