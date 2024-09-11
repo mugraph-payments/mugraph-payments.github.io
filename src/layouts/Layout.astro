@@ -4,6 +4,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+import '~/styles/globals.css';
 ---
 
 <!doctype html>
@@ -20,11 +22,3 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
-<style is:global>
-	:root {
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-	}
-</style>
