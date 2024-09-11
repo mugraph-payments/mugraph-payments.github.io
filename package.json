@@ -8,7 +8,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint --ext .astro,.js,.ts,.tsx .",
+    "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "husky",
     "lint-staged": "lint-staged"
@@ -38,10 +38,10 @@
     "tailwind-merge": "^2.5.2"
   },
   "lint-staged": {
-    "*.{js, jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,astro}": [
       "eslint --quiet --fix"
     ],
-    "*.{json,js,ts,jsx,tsx,html}": [
+    "*.{json,js,ts,jsx,tsx,html,astro}": [
       "prettier --write --ignore-unknown"
     ]
   }
