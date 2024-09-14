@@ -17,6 +17,6 @@
   }
 
   body[data-theme="dark"] {
-    @apply bg-background
+    @apply bg-background;
   }
 }
