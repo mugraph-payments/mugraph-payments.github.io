@@ -8,15 +8,15 @@ export interface TextProps
   as?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
 }
 
-const textVariants = cva("text-paragraph", {
+const textVariants = cva("text-secondary-foreground", {
   variants: {
     type: {
       body: "text-lg",
-      sub: "text-sub",
-      h1: "text-header text-5xl font-bold",
-      h2: "text-header text-4xl font-semibold",
-      h3: "text-header text-3xl font-medium",
-      h4: "text-header text-2xl font-medium",
+      sub: "text-muted",
+      h1: "text-foreground text-5xl font-bold",
+      h2: "text-foreground text-4xl font-semibold",
+      h3: "text-foreground text-3xl font-medium",
+      h4: "text-foreground text-2xl font-medium",
     },
   },
   defaultVariants: {
