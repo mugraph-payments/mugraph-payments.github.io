@@ -2,12 +2,15 @@
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    colors: {
-      'background': 'hsl(240, 10%, 3.9%)',
-      'header': '#fafafa',
-      'paragraph': '#a1a1aa',
+    extend: {
+      colors: {
+        background: "hsl(240, 10%, 3.9%)",
+        header: "hsl(226deg, 64%, 98%)",
+        paragraph: "hsl(226deg, 64%, 88%)",
+        sub: "hsl(228deg, 24%, 72%)",
+        inverted: "hsl(228deg, 24%, 10%)",
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
