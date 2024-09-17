@@ -1,0 +1,26 @@
+.navbar_container {
+  @apply relative w-full h-24 p-4 lg:h-36;
+  @apply border-b border-border;
+}
+
+.navbar_body {
+  @apply w-full h-full mx-auto max-w-screen-2xl;
+  @apply grid justify-center items-center gap-6;
+  grid-template-areas: "menu logo links";
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+}
+
+.logo_container {
+  grid-area: logo;
+  @apply flex w-auto max-h-full h-16 lg:h-20 justify-center;
+}
+
+.menu_container {
+  grid-area: menu;
+  @apply flex w-full text-foreground;
+}
+
+.links_container {
+  grid-area: links;
+  @apply flex w-auto gap-8 justify-end;
+}
