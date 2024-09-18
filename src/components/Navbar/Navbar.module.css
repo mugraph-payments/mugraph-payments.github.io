@@ -22,5 +22,5 @@
 
 .links_container {
   grid-area: links;
-  @apply flex w-auto gap-8 justify-end;
+  @apply hidden w-auto gap-8 justify-end lg:flex;
 }
