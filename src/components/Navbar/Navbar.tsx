@@ -6,12 +6,42 @@ import DrawerMenu, { type DrawerMenuProps } from "./DrawerMenu";
 export function Navbar() {
   const menu: DrawerMenuProps["menu"] = [
     {
-      title: "Home",
-      path: "/",
+      title: "Learn More",
+      links: [
+        {
+          title: "Blog",
+          path: "/blog",
+        },
+        {
+          title: "Documentation",
+          path: "#",
+        },
+        {
+          title: "Contributing",
+          path: "#",
+        },
+      ],
     },
     {
-      title: "About",
-      path: "/about",
+      title: "Community",
+      links: [
+        {
+          title: "Discord",
+          path: "#",
+        },
+        {
+          title: "Github",
+          path: "#",
+        },
+        {
+          title: "Nostr",
+          path: "#",
+        },
+        {
+          title: "X",
+          path: "#",
+        },
+      ],
     },
   ];
 

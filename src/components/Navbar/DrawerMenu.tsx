@@ -8,12 +8,18 @@ import {
 import { Fragment, useEffect, useState } from "react";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Logo from "../Logo/logo";
 
-export type DrawerMenuProps = {
-  menu: Array<{
+type MenuSection = {
+  title: string;
+  links: Array<{
     title: string;
     path: string;
   }>;
+};
+
+export type DrawerMenuProps = {
+  menu: MenuSection[];
 };
 
 export default function DrawerMenu({ menu }: DrawerMenuProps) {
@@ -63,36 +69,60 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
             leaveTo="translate-x-[-100%]"
           >
             <DialogPanel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-popover pb-6">
-              <div className="p-4">
-                <button
-                  className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 transition-colors dark:border-neutral-700"
-                  onClick={closeMobileMenu}
-                  aria-label="Close mobile menu"
-                >
-                  <XMarkIcon className="h-6" />
-                </button>
-
-                <div className="mb-4 w-full text-white">
-                  {/* <Suspense fallback={<SearchSkeleton />}>
-                    <Search />
-                  </Suspense> */}
+              <div className="h-full flex flex-col">
+                <div className="p-4 h-24 lg:h-36 grid grid-cols-3 gap-6 items-center border-b border-border">
+                  <div className="flex items-center">
+                    <button
+                      className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 transition-colors dark:border-neutral-700"
+                      onClick={closeMobileMenu}
+                      aria-label="Close mobile menu"
+                    >
+                      <XMarkIcon className="h-6" />
+                    </button>
+                  </div>
+                  <div className="w-fit aspect-auto h-16 lg:h-20 mx-auto">
+                    <Logo />
+                  </div>
                 </div>
-                {menu.length ? (
-                  <nav>
-                    <ul className="flex w-full flex-col">
-                      {menu.map((item: DrawerMenuProps["menu"][number]) => (
-                        <li
-                          className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
-                          key={item.title}
-                        >
-                          <a href={item.path} onClick={closeMobileMenu}>
-                            {item.title}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                ) : null}
+
+                <div className="p-4 pt-8 md:pt-16">
+                  {menu.length ? (
+                    <nav>
+                      <ul className="flex w-full flex-col gap-8">
+                        {menu.map((section: MenuSection) => (
+                          <li key={section.title}>
+                            <label className="text-xl font-bold text-muted-foreground">
+                              {section.title}
+                            </label>
+                            <ul className="flex w-full flex-col">
+                              {section.links.map((item) => (
+                                <li
+                                  className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
+                                  key={item.title}
+                                >
+                                  <a href={item.path} onClick={closeMobileMenu}>
+                                    {item.title}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  ) : null}
+                </div>
+
+                <div className="mt-auto bg-secondary w-fit p-4 rounded mx-4">
+                  Built on Cardano. 
+                  <a href="#" className="underline">
+                    Privacy Policy
+                  </a>{" "}
+                  |{" "}
+                  <a href="#" className="underline">
+                    Terms of Use
+                  </a>
+                </div>
               </div>
             </DialogPanel>
           </TransitionChild>
