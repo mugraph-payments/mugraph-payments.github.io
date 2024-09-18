@@ -58,30 +58,43 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
       <Card>
         <CardHeader />
         <CardContent>
-          <div>
-            <h2 class="text-3xl font-bold mb-4">Why Mugraph</h2>
-            <p class="mb-4">
-              μgraph addresses critical challenges in crypto adoption by
-              offering a solution that combines the security and
-              decentralization of blockchain with the speed and privacy of
-              traditional finance. This makes it an essential tool for those who
-              value financial freedom and confidentiality in an increasingly
-              digital economy.
-            </p>
-            <Button> Learn More </Button>
+          <div
+            class="flex flex-col md:flex-row justify-center items-center gap-4"
+          >
+            <h2
+              class="text-3xl font-bold mb-4 text-center md:text-left w-max whitespace-nowrap"
+            >
+              Why Mugraph
+            </h2>
+            <div class="w-full">
+              <p class="mb-4 text-center md:text-left">
+                μgraph addresses critical challenges in crypto adoption by
+                offering a solution that combines the security and
+                decentralization of blockchain with the speed and privacy of
+                traditional finance. This makes it an essential tool for those
+                who value financial freedom and confidentiality in an
+                increasingly digital economy.
+              </p>
+              <Button className="w-full md:w-max"> Learn More </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
     </section>
 
-    <section>
-      <h2 class="text-3xl font-bold mb-8">Roadmap</h2>
+    <section class="mx-auto">
+      <h2 class="text-3xl font-bold mb-12 text-center">Roadmap</h2>
       <div class="space-y-8">
         {
           [1, 2, 3, 4].map((milestone) => (
-            <div class="flex items-center gap-4">
-              <h3 class="text-xl font-semibold">Milestone {milestone}</h3>
-              <span class="text-2xl text-muted">|</span>
+            <div class="flex flex-col md:flex-row items-center gap-4">
+              <div class="contents">
+                <h3 class="text-xl font-semibold whitespace-nowrap">
+                  Milestone {milestone}
+                </h3>
+
+                <span class="h-1 md:h-8 w-full max-w-32 md:w-4 md:border-l border-border border-b md:border-b-0" />
+              </div>
               <p class="text-gray-400">
                 Rhoncus dui feugiat varius augue praesent gravida nec. Sed arcu
                 tristique fames suscipit, arcu lacinia nec lorem
