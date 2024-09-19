@@ -8,7 +8,9 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 <Layout title="Mugraph Homepage">
   <main class="px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-24 pt-12">
     <section class="text-center h-[40vh] flex flex-col justify-center">
-      <h1 class="text-5xl font-bold mb-4">Fast Private Payments</h1>
+      <h1 class="text-5xl font-bold mb-4 text-heading">
+        Fast Private Payments
+      </h1>
       <p class="mb-8 max-w-2xl mx-auto">
         μgraph is an open-source protocol built on Cardano, designed to address
         key challenges in cryptocurrency adoption for everyday transactions
@@ -47,8 +49,10 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
             <div class="w-12 h-12 bg-foreground rounded-full mx-auto mb-4 flex items-center justify-center">
               <ExclamationCircleIcon className="w-8 h-8 text-background" />
             </div>
-            <h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
-            <p class="text-gray-400">{feature.description}</p>
+            <h3 class="text-xl font-semibold mb-2 text-heading">
+              {feature.title}
+            </h3>
+            <p>{feature.description}</p>
           </div>
         ))
       }
@@ -62,7 +66,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
             class="flex flex-col md:flex-row justify-center items-center gap-4 text-foreground"
           >
             <h2
-              class="text-3xl font-bold mb-4 text-center md:text-left w-max whitespace-nowrap"
+              class="text-3xl font-bold mb-4 text-center md:text-left w-max whitespace-nowrap text-heading"
             >
               Why Mugraph
             </h2>
@@ -83,7 +87,7 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
     </section>
 
     <section class="mx-auto">
-      <h2 class="text-3xl font-bold mb-12 text-center">Roadmap</h2>
+      <h2 class="text-3xl font-bold mb-12 text-center text-heading">Roadmap</h2>
       <div class="space-y-8">
         {
           [1, 2, 3, 4].map((milestone) => (
@@ -93,9 +97,9 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
                   Milestone {milestone}
                 </h3>
 
-                <span class="h-1 md:h-8 w-full max-w-32 md:w-4 md:border-l border-border border-b md:border-b-0" />
+                <span class="h-1 md:h-8 w-full max-w-32 md:w-4 md:border-l border-muted-foreground border-b md:border-b-0" />
               </div>
-              <p class="text-gray-400">
+              <p>
                 Rhoncus dui feugiat varius augue praesent gravida nec. Sed arcu
                 tristique fames suscipit, arcu lacinia nec lorem
               </p>

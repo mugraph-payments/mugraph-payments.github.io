@@ -24,7 +24,8 @@
   :root {
     --background: 240 21% 15%;
     --foreground: 226 64% 88%;
-    --card: 240 21% 15%;
+    --heading: 267deg, 84%, 81%;
+    --card: 237, 16%, 15%;
     --card-foreground: 226 64% 88%;
     --popover: 240 21% 15%;
     --popover-foreground: 226 64% 88%;
@@ -35,7 +36,7 @@
     --muted: 237 16% 23%;
     --muted-foreground: 228 24% 72%;
     --accent: 237 16% 23%;
-    --accent-foreground: 226 64% 88%;
+    --accent-foreground: 267deg, 84%, 81%;
     --destructive: 343 81% 75%;
     --destructive-foreground: 226 64% 88%;
     --border: 234 13% 31%;
@@ -52,7 +53,8 @@
   .dark {
     --background: 240 23% 9%;
     --foreground: 226 64% 88%;
-    --card: 240 23% 9%;
+    --heading: 232, 97%, 85%;
+    --card: 237, 16%, 23%;
     --card-foreground: 226 64% 88%;
     --popover: 240 23% 9%;
     --popover-foreground: 226 64% 88%;
@@ -63,7 +65,7 @@
     --muted: 240 21% 12%;
     --muted-foreground: 228 24% 72%;
     --accent: 240 21% 12%;
-    --accent-foreground: 226 64% 88%;
+    --accent-foreground: 267deg, 84%, 81%;
     --destructive: 343 81% 75%;
     --destructive-foreground: 226 64% 88%;
     --border: 240 21% 12%;
