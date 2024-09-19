@@ -12,17 +12,17 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">Learn More</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="/blog" className="hover:text-white hover:underline">
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Contributing
                 </a>
               </li>
@@ -32,22 +32,22 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">Community</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Discord
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Github
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Nostr
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   X
                 </a>
               </li>
@@ -57,17 +57,17 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">Column 3</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Link
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Link
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
+                <a href="#" className="hover:text-white hover:underline">
                   Link
                 </a>
               </li>

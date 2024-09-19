@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import { Card, CardContent, CardHeader } from "~/components/Card/Card";
+import { Date } from "~/components/Date/Date";
+import Layout from "~/layouts/Layout.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout title="Mugraph Homepage">
+  <main
+    class="min-h-screen px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-24 pt-12"
+  >
+    <h1 class="text-5xl font-bold mb-4 text-center">Mugraph Blog</h1>
+    <section class="text-center flex flex-col justify-center">
+      <ul class="grid lg:grid-cols-2 overflow-y-auto gap-4">
+        {
+          posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}/`}>
+                <Card className="bg-secondary hover:bg-primary hover:text-black">
+                  <CardHeader>
+                    <h4 class="text-left text-2xl font-medium">
+                      {post.data.title}
+                    </h4>
+                  </CardHeader>
+
+                  <CardContent className="flex flex-col justify-center text-left">
+                    <p>
+                      <Date date={post.data.date} />
+                    </p>
+                    <p>{post.data.description}</p>
+                  </CardContent>
+                </Card>
+              </a>
+            </li>
+          ))
+        }
+        {
+          posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}/`}>
+                <Card className="bg-secondary hover:bg-primary hover:text-black">
+                  <CardHeader>
+                    <h4 class="text-left text-2xl font-medium">
+                      {post.data.title}
+                    </h4>
+                  </CardHeader>
+
+                  <CardContent className="flex flex-col justify-center text-left">
+                    <p>
+                      <Date date={post.data.date} />
+                    </p>
+                    <p>{post.data.description}</p>
+                  </CardContent>
+                </Card>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,42 @@
+.prose {
+  @apply text-left text-lg;
+}
+
+.prose h1 {
+  @apply text-5xl font-bold my-16;
+}
+.prose h2 {
+  @apply text-4xl font-semibold my-8;
+}
+.prose h3 {
+  @apply text-3xl font-medium my-4;
+}
+.prose h4 {
+  @apply text-2xl font-medium my-4;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  @apply text-foreground;
+}
+
+.prose ul {
+  @apply list-none space-y-4 my-4;
+}
+.prose ol {
+  @apply list-decimal pl-5 space-y-4 my-4;
+}
+.prose li {
+  @apply mb-2;
+}
+.prose blockquote {
+  @apply border-l-4 pl-4 italic text-muted;
+}
+.prose img {
+  @apply max-w-full h-auto;
+}
+.prose a {
+  @apply text-blue-500 hover:underline;
+}

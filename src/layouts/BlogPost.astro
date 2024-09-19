@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "./Layout.astro";
+import { Date } from "~/components/Date/Date";
+import "~/styles/blog.css";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, date, lastUpdate } = Astro.props;
+---
+
+<Layout title={title}>
+  <main
+    class="min-h-screen px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-24 pt-12 items-center"
+  >
+    <article class="text-center gap-8 flex flex-col justify-center max-w-4xl">
+      <div class="">
+        <h1 class="text-5xl font-bold mb-16">{title}</h1>
+        <div class="flex justify-between gap-8">
+          <div>
+            <Date date={date} />
+            {
+              lastUpdate && (
+                <div class="last-updated-on">
+                  Last updated on <Date date={lastUpdate} />
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>
