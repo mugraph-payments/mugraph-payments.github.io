@@ -6,10 +6,10 @@ import "~/styles/blog.css";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, date, lastUpdate } = Astro.props;
+const { title, description, date, lastUpdate } = Astro.props;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <main
     class="min-h-screen px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-24 pt-12 items-center"
   >
