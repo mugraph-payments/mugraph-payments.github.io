@@ -38,28 +38,6 @@ const posts = (await getCollection("blog")).sort(
             </li>
           ))
         }
-        {
-          posts.map((post) => (
-            <li>
-              <a href={`/blog/${post.slug}/`}>
-                <Card className="bg-secondary hover:bg-primary hover:text-black">
-                  <CardHeader>
-                    <h4 class="text-left text-2xl font-medium">
-                      {post.data.title}
-                    </h4>
-                  </CardHeader>
-
-                  <CardContent className="flex flex-col justify-center text-left">
-                    <p>
-                      <Date date={post.data.date} />
-                    </p>
-                    <p>{post.data.description}</p>
-                  </CardContent>
-                </Card>
-              </a>
-            </li>
-          ))
-        }
       </ul>
     </section>
   </main>
