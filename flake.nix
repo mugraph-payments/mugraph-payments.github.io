@@ -18,7 +18,12 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        devShells.default = pkgs.mkShell { packages = with pkgs; [ hugo ]; };
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            nodejs
+            nodePackages.pnpm
+          ];
+        };
       }
     );
 }
