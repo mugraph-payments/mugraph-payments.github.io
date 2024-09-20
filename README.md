@@ -1,69 +1,54 @@
-# Kayal
+# Astro Starter Kit: Basics
 
-Kayal is a Hugo theme designed to be minimal and lightweight, with markdown-ish aesthetics for personal blog sites.
+```sh
+npm create astro@latest -- --template basics
+```
 
-<h2 align="center"><a href="https://mnjm.github.io/kayal/">Demo site</a></h2>
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
-![Demo Site GH Pages](https://github.com/mnjm/kayal/actions/workflows/main.yaml/badge.svg)
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-| Desktop | Mobile |
-| ---- | ---- |
-|![Desktop](https://github.com/mnjm/kayal/blob/main/images/tn.png?raw=true)|![Mobile](https://github.com/mnjm/kayal/blob/main/images/mobile.png?raw=true)|
+![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-Source for the Demo site is available in [exampleSite](https://github.com/mnjm/kayal/tree/exampleSite) branch.
+## 🚀 Project Structure
 
-## Features
-- Clean and Responsive Design
-- Light and Dark Color Modes: Automatically adjusts based on browser preferences and/or manual toggle.
-- Profile Homepage
-- Customizable Configuration: Easily adjust settings to personalize
-- Shortcodes: Includes Callouts, Markdown and Code import from 3rd Party sites.
-- KaTeX Support
-- Mermaid Diagrams Support
-- Cross-linking: Ability to link posts on third party sites.
-- RSS Feed
-- Table of Contents
-- Code Copy
-- Heading Anchors
-- Google Analytics
-- SVG Icons from FontAwesome 6
-- SEO Friendly.
-- Breadcrumbs
-- Article Cover image
-- Extensibility: Includes placeholders for
-    - Custom Homepage
-    - Other Analytics
-    - Comments
-    - Custom CSS
-    - Custom header
-- Site hosted assets / no CDNs
-- And many more...
+Inside of your Astro project, you'll see the following folders and files:
 
-## Installation
-Kayal supports several installation methods: as a git submodule, a Hugo Module, or through manual installation.
+```text
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   └── Card.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-Detailed instructions on how to install Kayal can be found in [Installation](https://mnjm.github.io/kayal/docs/getting-started/) on the demo site. Here's a quick guide on how to install the theme as a git submodule:
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-1. In your Hugo site directory, run the following command:
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-    ```bash
-    git submodule add -b main https://github.com/mnjm/kayal.git themes/kayal
-    ```
+Any static assets, like images, can be placed in the `public/` directory.
 
-2. Copy config files from `themes/kayal/config/_default` to `config/_default` at the root of your Hugo project. Make necessary configuration changes in these files. Refer to [Configuration](https://mnjm.github.io/kayal/docs/configuration/) on the demo site for more information.
-3. Remove `hugo.toml` if present, and build the site.
+## 🧞 Commands
 
-## Configuration
+All commands are run from the root of the project, from a terminal:
 
-The config files included with Kayal contain all possible settings recognized by the theme. By default, many of these settings are commented out, but you can simply uncomment them to activate or modify.
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-Refer to [Configuration](https://mnjm.github.io/kayal/docs/configuration/) on the demo site for more details.
+## 👀 Want to learn more?
 
-## Contribution
-Found a bug or have a new feature idea? Create an issue to let me know, or even better, submit a pull request directly!
-
-## Addendum
-While building this theme, I constantly referred to the source codes of [Blowfish](https://github.com/nunocoracao/blowfish) and [Hugo-PaperMod](https://github.com/adityatelange/hugo-PaperMod). The idea for using markdown aesthetics came from [Archie](https://github.com/mnjm/archie), another Hugo theme.
-
-## License
-This theme is released under the [MIT License](./LICENSE).
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
