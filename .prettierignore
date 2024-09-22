@@ -4,3 +4,7 @@ build
 dist
 *-lock.json
 *-lock.yaml
+
+flake.*
+
+.github/*
