@@ -1,0 +1,128 @@
+.wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+.base {
+  --border-size: 2px;
+  --blur-size: 5px;
+  @apply inline-flex items-center justify-center;
+  @apply whitespace-nowrap rounded-md text-sm font-medium transition-colors;
+  @apply focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring;
+  @apply disabled:pointer-events-none disabled:opacity-50;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.base:before {
+  content: "";
+  background: linear-gradient(
+    90deg,
+    hsl(var(--theme-mauve)) 0%,
+    hsl(var(--theme-lavender)) 50%,
+    hsl(var(--theme-mauve)) 100%
+  );
+
+  position: absolute;
+  top: calc(-1 * var(--border-size));
+  left: calc(-1 * var(--border-size));
+  background-size: 200%;
+  z-index: -1;
+  filter: blur(var(--blur-size));
+  width: calc(100% + 2 * var(--border-size));
+  height: calc(100% + 2 * var(--border-size));
+  animation: glowing 20s linear infinite;
+  animation: pulsing 1.75s ease-out infinite;
+  transition: opacity 150ms ease-in-out;
+  opacity: 0;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.base:hover:before {
+  opacity: 1;
+}
+
+.base:hover.base:after {
+  opacity: 1;
+}
+
+/* Variants */
+.default {
+  @apply bg-primary text-primary-foreground shadow-sm;
+  @apply hover:bg-secondary text-secondary-foreground;
+  @apply border border-background border-solid;
+}
+
+.destructive {
+  @apply bg-destructive text-destructive-foreground shadow-sm;
+  @apply border border-background border-solid;
+}
+.destructive.base::before {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--theme-red)) 0%,
+    hsl(var(--theme-maroon)) 50%,
+    hsl(var(--theme-red)) 100%
+  );
+}
+
+.outline {
+  @apply bg-background/100 shadow-sm;
+  @apply border border-border border-solid;
+  @apply bg-background/90;
+}
+
+.secondary {
+  @apply bg-secondary text-secondary-foreground shadow-sm;
+  @apply hover:bg-primary hover:text-primary-foreground;
+  @apply border border-background border-solid;
+}
+
+.ghost {
+  @apply bg-black text-muted-foreground shadow-sm;
+  @apply hover:bg-primary hover:text-primary-foreground;
+  @apply border border-background border-solid;
+}
+
+.link {
+  @apply bg-transparent text-primary-foreground underline-offset-4;
+  @apply hover:underline hover:text-accent;
+}
+
+.inverse {
+  @apply bg-foreground/100 text-background shadow-sm;
+  @apply border border-background border-solid;
+  @apply hover:bg-foreground/60;
+}
+
+.link.base::before {
+  opacity: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 400% 0;
+  }
+}
+
+@keyframes pulsing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
