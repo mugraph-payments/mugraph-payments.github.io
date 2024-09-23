@@ -9,6 +9,7 @@ import { Fragment, useEffect, useState } from "react";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../Logo/logo";
+import { Link } from "../Link/Link";
 
 type MenuSection = {
   title: string;
@@ -97,12 +98,15 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
                             <ul className="flex w-full flex-col">
                               {section.links.map((item) => (
                                 <li
-                                  className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white"
+                                  className="py-2 text-xltransition-colors transition-transform duration-300 hover:translate-x-[10px]"
                                   key={item.title}
                                 >
-                                  <a href={item.path} onClick={closeMobileMenu}>
+                                  <Link
+                                    href={item.path}
+                                    onClick={closeMobileMenu}
+                                  >
                                     {item.title}
-                                  </a>
+                                  </Link>
                                 </li>
                               ))}
                             </ul>

@@ -1,3 +1,4 @@
+import { Link } from "../Link/Link";
 import Logo from "../Logo/logo";
 
 export function Footer() {
@@ -12,19 +13,13 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">Learn More</h4>
             <ul className="space-y-2">
               <li>
-                <a href="/blog" className="hover:text-white hover:underline">
-                  Blog
-                </a>
+                <Link href="/blog">Blog</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Documentation
-                </a>
+                <Link href="#">Documentation</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Contributing
-                </a>
+                <Link href="#">Contributing</Link>
               </li>
             </ul>
           </div>
@@ -32,24 +27,16 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">Community</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Discord
-                </a>
+                <Link href="#">Discord</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Github
-                </a>
+                <Link href="#">Github</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Nostr
-                </a>
+                <Link href="#">Nostr</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  X
-                </a>
+                <Link href="#">X</Link>
               </li>
             </ul>
           </div>
@@ -57,19 +44,13 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">Column 3</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Link
-                </a>
+                <Link href="#">Link</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Link
-                </a>
+                <Link href="#">Link</Link>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Link
-                </a>
+                <Link href="#">Link</Link>
               </li>
             </ul>
           </div>
@@ -78,13 +59,13 @@ export function Footer() {
           © 2024 μgraph. Open-source under MIT and Apache 2.0 License.
           <br />
           Built on Cardano.{" "}
-          <a href="#" className="underline">
+          <Link href="#" className="underline">
             Privacy Policy
-          </a>{" "}
+          </Link>{" "}
           |{" "}
-          <a href="#" className="underline">
+          <Link href="#" className="underline">
             Terms of Use
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
