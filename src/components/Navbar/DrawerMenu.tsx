@@ -43,7 +43,7 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 transition-colors dark:border-neutral-700"
+        className="flex h-11 w-11 items-center justify-center rounded-md border border-border transition-colors hover:border-accent hover:text-accent"
       >
         <Bars3Icon className="h-4" />
       </button>
@@ -74,7 +74,7 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
                 <div className="p-4 h-24 lg:h-36 grid grid-cols-3 gap-6 items-center border-b border-border">
                   <div className="flex items-center">
                     <button
-                      className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 transition-colors dark:border-neutral-700"
+                      className="mb-4 flex h-11 w-11 items-center justify-center rounded-md border transition-colors hover:border-accent hover:text-accent"
                       onClick={closeMobileMenu}
                       aria-label="Close mobile menu"
                     >
@@ -98,7 +98,7 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
                             <ul className="flex w-full flex-col">
                               {section.links.map((item) => (
                                 <li
-                                  className="py-2 text-xltransition-colors transition-transform duration-300 hover:translate-x-[10px]"
+                                  className="py-2 text-xltransition-colors transition-transform duration-300 hover:translate-x-[10px] w-max"
                                   key={item.title}
                                 >
                                   <Link
