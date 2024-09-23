@@ -1,7 +1,36 @@
+import type { MenuSection } from "~/utils/types";
 import { Link } from "../Link/Link";
 import Logo from "../Logo/logo";
 
 export function Footer() {
+  const menu: MenuSection[] = [
+    {
+      title: "Learn More",
+      links: [
+        { title: "Blog", path: "/blog" },
+        { title: "Documentation", path: "#" },
+        { title: "Contributing", path: "#" },
+      ],
+    },
+    {
+      title: "Community",
+      links: [
+        { title: "Discord", path: "#" },
+        { title: "Github", path: "#" },
+        { title: "Nostr", path: "#" },
+        { title: "X", path: "#" },
+      ],
+    },
+    {
+      title: "Column 3",
+      links: [
+        { title: "Link", path: "#" },
+        { title: "Link", path: "#" },
+        { title: "Link", path: "#" },
+      ],
+    },
+  ];
+
   return (
     <footer className="bg-secondary py-12 mt-24 border-t border-border">
       <div className="container mx-auto px-4">
@@ -9,51 +38,21 @@ export function Footer() {
           <div className="flex items-center space-x-2 mb-4 h-16 mx-auto">
             <Logo />
           </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Learn More</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/blog">Blog</Link>
-              </li>
-              <li>
-                <Link href="#">Documentation</Link>
-              </li>
-              <li>
-                <Link href="#">Contributing</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Community</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#">Discord</Link>
-              </li>
-              <li>
-                <Link href="#">Github</Link>
-              </li>
-              <li>
-                <Link href="#">Nostr</Link>
-              </li>
-              <li>
-                <Link href="#">X</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Column 3</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#">Link</Link>
-              </li>
-              <li>
-                <Link href="#">Link</Link>
-              </li>
-              <li>
-                <Link href="#">Link</Link>
-              </li>
-            </ul>
-          </div>
+          {menu &&
+            menu.map(({ title, links }, index) => (
+              <div key={index}>
+                <h4 className="text-lg font-semibold mb-4">{title}</h4>
+                <ul className="space-y-2">
+                  {links.map(({ title, path, newTab }, index) => (
+                    <li key={index}>
+                      <Link href={path} newTab={!!newTab}>
+                        {title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
         </div>
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           © 2024 μgraph. Open-source under MIT and Apache 2.0 License.

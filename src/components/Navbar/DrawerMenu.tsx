@@ -10,14 +10,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo from "../Logo/logo";
 import { Link } from "../Link/Link";
-
-type MenuSection = {
-  title: string;
-  links: Array<{
-    title: string;
-    path: string;
-  }>;
-};
+import type { MenuSection } from "~/utils/types";
 
 export type DrawerMenuProps = {
   menu: MenuSection[];
@@ -104,6 +97,7 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
                                   <Link
                                     href={item.path}
                                     onClick={closeMobileMenu}
+                                    newTab={!!item.newTab}
                                   >
                                     {item.title}
                                   </Link>
