@@ -5,7 +5,6 @@ export default function Logo() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 573.796 448.53"
-          width="auto"
           height="100%"
           className="overflow-visible"
           preserveAspectRatio="xMidYMid meet"
