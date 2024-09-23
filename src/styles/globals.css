@@ -53,46 +53,19 @@
     --theme-crust: 240 23% 9%;
   }
 
-  :root {
-    --background: var(--theme-crust);
-    --foreground: var(--theme-text);
-    --heading: 232, 97%, 85%;
-    --card: var(--theme-mantle);
-    --card-foreground: var(--theme-text);
-    --popover: var(--theme-crust);
-    --popover-foreground: var(--theme-text);
-    --primary: var(--theme-surface2);
-    --primary-foreground: var(--theme-text);
-    --secondary: var(--theme-surface0);
-    --secondary-foreground: var(--theme-text);
-    --muted: var(--theme-surface0);
-    --muted-foreground: var(--theme-text);
-    --accent: var(--theme-mauve);
-    --accent-foreground: var(--theme-text);
-    --destructive: var(--theme-red);
-    --destructive-foreground: var(--background);
-    --border: var(--theme-subtext0);
-    --input: var(--theme-subtext0);
-    --ring: var(--theme-text);
-    --chart-1: var(--theme-blue);
-    --chart-2: var(--theme-teal);
-    --chart-3: var(--theme-sapphire);
-    --chart-4: var(--theme-yellow);
-    --chart-5: var(--theme-peach);
-  }
-
+  :root,
   .dark {
-    /* Light and Dark are the same for now */
+    /* Dark is the only theme for now */
     --background: var(--theme-crust);
     --foreground: var(--theme-text);
     --heading: 232, 97%, 85%;
-    --card: var(--theme-mantle);
+    --card: var(--theme-base);
     --card-foreground: var(--theme-text);
     --popover: var(--theme-crust);
     --popover-foreground: var(--theme-text);
     --primary: var(--theme-surface2);
     --primary-foreground: var(--theme-text);
-    --secondary: var(--theme-surface0);
+    --secondary: var(--theme-mantle);
     --secondary-foreground: var(--theme-text);
     --muted: var(--theme-surface0);
     --muted-foreground: var(--theme-text);
@@ -100,7 +73,7 @@
     --accent-foreground: var(--theme-text);
     --destructive: var(--theme-red);
     --destructive-foreground: var(--background);
-    --border: var(--theme-subtext0);
+    --border: var(--theme-surface0);
     --input: var(--theme-subtext0);
     --ring: var(--theme-text);
     --chart-1: var(--theme-blue);
