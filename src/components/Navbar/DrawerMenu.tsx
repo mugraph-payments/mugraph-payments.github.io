@@ -1,4 +1,3 @@
-"use client";
 import {
   Dialog,
   DialogPanel,
@@ -8,8 +7,8 @@ import {
 import { Fragment, useEffect, useState } from "react";
 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Logo from "../Logo/logo";
-import { Link } from "../Link/Link";
+import Logo from "~/components/Logo/logo";
+import { Link } from "~/components/Link/Link";
 import type { MenuSection } from "~/utils/types";
 
 export type DrawerMenuProps = {
