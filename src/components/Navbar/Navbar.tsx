@@ -2,6 +2,7 @@ import classes from "./Navbar.module.css";
 import clsx from "clsx";
 import Logo from "../Logo/logo";
 import DrawerMenu, { type DrawerMenuProps } from "./DrawerMenu";
+import { Link } from "../Link/Link";
 
 export function Navbar() {
   const menu: DrawerMenuProps["menu"] = [
@@ -56,12 +57,16 @@ export function Navbar() {
         </div>
 
         <div className={classes.links_container}>
-          <a href="https://github.com/mugraph-payments/mugraph" className={``}>
+          <Link
+            href="https://github.com/mugraph-payments/mugraph"
+            className={``}
+          >
             Github
-          </a>
-          <a href="https://discord.gg/VRJremtk" className={``}>
+          </Link>
+
+          <Link href="https://discord.gg/VRJremtk" className={``}>
             Discord
-          </a>
+          </Link>
         </div>
       </div>
     </header>
