@@ -1,14 +1,13 @@
 export default function Logo() {
   return (
-    <div className="w-auto h-full">
+    <div className="w-auto h-full hover:text-accent">
       <a className="w-full" href="/" aria-label="Home">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 573.796 448.53"
-          width="100%"
           height="100%"
           className="overflow-visible"
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid meet"
           version="1.1"
         >
           <path

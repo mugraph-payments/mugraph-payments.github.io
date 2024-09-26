@@ -1,6 +1,36 @@
+import type { MenuSection } from "~/utils/types";
+import { Link } from "../Link/Link";
 import Logo from "../Logo/logo";
 
 export function Footer() {
+  const menu: MenuSection[] = [
+    {
+      title: "Learn More",
+      links: [
+        { title: "Blog", path: "/blog" },
+        { title: "Documentation", path: "#" },
+        { title: "Contributing", path: "#" },
+      ],
+    },
+    {
+      title: "Community",
+      links: [
+        { title: "Discord", path: "#" },
+        { title: "Github", path: "#" },
+        { title: "Nostr", path: "#" },
+        { title: "X", path: "#" },
+      ],
+    },
+    {
+      title: "Column 3",
+      links: [
+        { title: "Link", path: "#" },
+        { title: "Link", path: "#" },
+        { title: "Link", path: "#" },
+      ],
+    },
+  ];
+
   return (
     <footer className="bg-secondary py-12 mt-24 border-t border-border">
       <div className="container mx-auto px-4">
@@ -8,83 +38,33 @@ export function Footer() {
           <div className="flex items-center space-x-2 mb-4 h-16 mx-auto">
             <Logo />
           </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Learn More</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="/blog" className="hover:text-white hover:underline">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Documentation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Contributing
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Community</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Github
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Nostr
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  X
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Column 3</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Link
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Link
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline">
-                  Link
-                </a>
-              </li>
-            </ul>
-          </div>
+          {menu &&
+            menu.map(({ title, links }, index) => (
+              <div key={index}>
+                <h4 className="text-lg font-semibold mb-4">{title}</h4>
+                <ul className="space-y-2">
+                  {links.map(({ title, path, newTab }, index) => (
+                    <li key={index}>
+                      <Link href={path} newTab={!!newTab}>
+                        {title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
         </div>
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           © 2024 μgraph. Open-source under MIT and Apache 2.0 License.
           <br />
           Built on Cardano.{" "}
-          <a href="#" className="underline">
+          <Link href="#" className="underline">
             Privacy Policy
-          </a>{" "}
+          </Link>{" "}
           |{" "}
-          <a href="#" className="underline">
+          <Link href="#" className="underline">
             Terms of Use
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
