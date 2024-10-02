@@ -1,4 +1,5 @@
 ---
+import Background from "~/components/Background/Background.astro";
 import BaseHead from "~/components/BaseHead.astro";
 import { Footer } from "~/components/Footer/Footer";
 import { Navbar } from "~/components/Navbar/Navbar";
@@ -19,7 +20,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   </head>
   <body class="dark">
     <Navbar client:load />
-    <slot />
+    <Background>
+      <slot />
+    </Background>
     <Footer />
   </body>
 </html>
