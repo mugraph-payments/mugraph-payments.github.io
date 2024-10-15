@@ -5,54 +5,83 @@ const {} = Astro.props;
 ---
 
 <script>
+  import * as THREE from "three";
+  import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+  import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+  import {
+    fragmentShader as galaxyFragmentShader,
+    vertexShader as galaxyVertexShader,
+  } from "./shaders/galaxy";
+  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
   class HeroBackground {
+    private scene: THREE.Scene;
+    private renderer: THREE.WebGLRenderer;
+    private composer: EffectComposer;
+    private renderScene: RenderPass;
+    private clock: THREE.Clock;
+    private time = 0;
+    private delta = 0;
+    private camera: THREE.PerspectiveCamera;
+    private galaxyMesh: THREE.Points;
+
+    private settings = {
+      antialias: true,
+      cameraPosition: [0, -100, 200],
+      aspect: window.innerWidth / window.innerHeight,
+      near: 0.1,
+      far: 1000,
+      fov: 75,
+      zoom: 1,
+      gridHelper: false,
+      orbitControls: true,
+      autoRotate: false,
+    };
+
     private canvas: HTMLCanvasElement;
-    private gl: WebGL2RenderingContext;
-    private program: WebGLProgram;
-    private positionBuffer: WebGLBuffer;
-    private resolutionUniformLocation: WebGLUniformLocation;
-    private timeUniformLocation: WebGLUniformLocation;
-    private mouseUniformLocation: WebGLUniformLocation;
-    private mouseLerpUniformLocation: WebGLUniformLocation;
-    private startTime: number;
+
     private requestId: number | null = null;
     private uniforms: {
-      mouse: { value: { x: number; y: number } };
-      mouseLerp: { value: { x: number; y: number } };
+      [key: string]: THREE.IUniform;
     };
 
     constructor(canvasId: string) {
       this.canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-      this.gl = this.canvas.getContext("webgl2") as WebGL2RenderingContext;
-      this.startTime = Date.now();
       this.uniforms = {
         mouse: { value: { x: 0, y: 0 } },
         mouseLerp: { value: { x: 0, y: 0 } },
+        size: { value: 1 },
+        t: { value: 0 },
+        z: { value: 0 },
+        pixelRatio: { value: window.innerHeight },
+        time: { value: this.time },
+        delta: { value: this.delta },
       };
 
-      if (!this.gl) {
-        throw new Error("WebGL2 not supported");
-      }
+      this.clock = new THREE.Clock();
 
-      this.program = this.createProgram();
-      this.gl.useProgram(this.program);
-      this.positionBuffer = this.createPositionBuffer();
-      this.resolutionUniformLocation = this.gl.getUniformLocation(
-        this.program,
-        "resolution",
-      )!;
-      this.timeUniformLocation = this.gl.getUniformLocation(
-        this.program,
-        "time",
-      )!;
-      this.mouseUniformLocation = this.gl.getUniformLocation(
-        this.program,
-        "mouse",
-      )!;
-      this.mouseLerpUniformLocation = this.gl.getUniformLocation(
-        this.program,
-        "mouseLerp",
-      )!;
+      this.scene = new THREE.Scene();
+      const { fov, aspect, near, far } = this.settings;
+      this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+      const [cameraX, cameraY, cameraZ] = this.settings.cameraPosition;
+      this.camera.position.set(cameraX, cameraY, cameraZ);
+
+      this.scene.background = new THREE.Color(0x090c1b);
+      this.renderer = new THREE.WebGLRenderer({
+        canvas: this.canvas,
+        antialias: this.settings.antialias,
+        alpha: true,
+      });
+      this.renderer.setClearAlpha(0);
+      this.renderer.setPixelRatio(1);
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+      this.composer = new EffectComposer(this.renderer);
+      this.composer.setSize(window.innerWidth, window.innerHeight);
+
+      this.renderScene = new RenderPass(this.scene, this.camera);
+      this.composer.addPass(this.renderScene);
 
       this.resize = this.resize.bind(this);
       this.render = this.render.bind(this);
@@ -61,146 +90,150 @@ const {} = Astro.props;
       window.addEventListener("resize", this.resize);
       window.addEventListener("mousemove", this.handleMouse);
 
+      let galaxyMaterial = new THREE.ShaderMaterial({
+        vertexShader: galaxyVertexShader,
+        fragmentShader: galaxyFragmentShader,
+        uniforms: this.uniforms,
+        transparent: true,
+        depthTest: false,
+        blending: THREE.AdditiveBlending,
+      });
+
+      let starPositions = this.createGalaxBuffer();
+      let galaxyGeometry = new THREE.BufferGeometry();
+      galaxyGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(starPositions, 3),
+      );
+
+      this.galaxyMesh = new THREE.Points(galaxyGeometry, galaxyMaterial);
+      this.scene.add(this.galaxyMesh);
+
+      let orbitControls = new OrbitControls(
+        this.camera,
+        this.renderer.domElement,
+      );
+      orbitControls.enabled = this.settings.orbitControls;
+      orbitControls.autoRotateSpeed = 0.5;
+      orbitControls.autoRotate = this.settings.autoRotate;
+
+      if (this.settings.gridHelper) {
+        const gridHelper = new THREE.GridHelper(10, 10);
+        this.scene.add(gridHelper);
+      }
+
       this.resize();
       this.render();
     }
 
-    private createProgram(): WebGLProgram {
-      const vertexShaderSrc = `#version 300 es
-      in vec2 position;
-      out vec2 vUv;
+    /* Adapted from https://codepen.io/Astrak/pen/BoBWPB for now */
+    private createGalaxBuffer(
+      starCount = 10000,
+      axis1?: number,
+      axis2?: number,
+      armsAngle?: number,
+      bulbSize?: number,
+      ellipticity?: number,
+    ): Float32Array {
+      let stars = new Float32Array(starCount * 3);
 
-      void main(void) {
-        vUv = position;
-        gl_Position = vec4(position, 0.0, 1.0);
-      }
-    `;
+      let scale = 100;
+      // to get 'arms', the main galaxy shape has to be an ellipse, i.e. axis1/axis2 must raise over a certain %
+      // otherwise, because of the 'ellipticity' z-profile problem, you get a potato
+      // axis1 = axis1 ?? scale + Math.random() * (0.2 * scale);
+      // axis2 = axis2 ?? axis1 + scale * 0.5 + Math.random() * (0.2 * scale);
+      axis1 = axis1 ?? 60 + Math.random() * 20;
+      axis2 = axis2 ?? axis1 + 20 + Math.random() * 40;
 
-      const fragmentShaderSrc = `#version 300 es
-      precision highp float;
-
-      uniform vec2 resolution;
-      uniform float time;
-      uniform float fft;
-      out vec4 fragColor;
-      uniform vec2 mouseLerp;
-      in vec2 vUv;
-
-      void main() {
-        vec3 color = vec3(vUv, 0.0);
-        fragColor = vec4(color, 1.0);
-      }
-    `;
-
-      const vertexShader = this.createShader(
-        this.gl.VERTEX_SHADER,
-        vertexShaderSrc,
-      );
-      const fragmentShader = this.createShader(
-        this.gl.FRAGMENT_SHADER,
-        fragmentShaderSrc,
-      );
-
-      const program = this.gl.createProgram()!;
-      this.gl.attachShader(program, vertexShader);
-      this.gl.attachShader(program, fragmentShader);
-      this.gl.linkProgram(program);
-
-      if (!this.gl.getProgramParameter(program, this.gl.LINK_STATUS)) {
-        throw new Error(
-          "Unable to initialize the shader program: " +
-            this.gl.getProgramInfoLog(program),
-        );
+      // make sure axis1 is the biggest (eccentricity equation fails if they are inverted), and allow the coder not to care about axis order
+      let maja: number, mina: number;
+      if (axis1 > axis2) {
+        maja = axis1;
+        mina = axis2;
+      } else if (axis1 === axis2) {
+        maja = axis1 + 1;
+        mina = axis2;
+      } else {
+        maja = axis2;
+        mina = axis1;
       }
 
-      return program;
-    }
+      // radians from the center to the end of each arm, proposed value range: between 3 and 13
+      armsAngle = armsAngle ?? (Math.random() * 2 - 1 > 0 ? 1 : -1) * 12 + 3;
 
-    private createShader(type: number, source: string): WebGLShader {
-      const shader = this.gl.createShader(type)!;
-      this.gl.shaderSource(shader, source);
-      this.gl.compileShader(shader);
+      // core proportion in the (x,y) plane, between 0 and 1, proposed value range: between .1 and .8
+      bulbSize =
+        bulbSize === undefined
+          ? Math.random() * 0.6
+          : Math.max(0, Math.min(1, bulbSize));
 
-      if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
-        throw new Error(
-          "An error occurred compiling the shaders: " +
-            this.gl.getShaderInfoLog(shader),
-        );
+      // 'ellipticity': not found a better word to name the degree of 'elliptic' Hubble type.
+      // 'ellipticity' is what is mainly responsible for the z-profile in this experiment.
+      // Range: between 0 and 1. Proposed: .2 to .4
+      // TODO: implement string handling (or value from spacename?) to create Hubble-class galaxy ala 'SBb'...
+      ellipticity =
+        ellipticity === undefined
+          ? 0.2 + Math.random() * 0.2
+          : Math.max(0, Math.min(1, ellipticity));
+
+      for (let i = 0; i < starCount; i++) {
+        const dist = Math.random();
+        const angle = (dist - bulbSize) * armsAngle;
+        // ellipse parameters
+        const a = maja * dist;
+        const b = mina * dist;
+        const e = Math.sqrt(a * a - b * b) / a;
+        const phi =
+          ((ellipticity * Math.PI) / 2) * (1 - dist) * (Math.random() * 2 - 1);
+        // create point on the ellipse with polar coordinates
+        // 1. random angle from the center
+        let theta = Math.random() * Math.PI * 2;
+        // 2. deduce radius from theta in polar coordinates, from the CENTER of an ellipse, plus variations
+        const radius =
+          Math.sqrt((b * b) / (1 - e * e * Math.pow(Math.cos(theta), 2))) *
+          (1 + Math.random() * 0.1);
+        // 3. then shift theta with the angle offset to get arms, outside the bulb
+        if (dist > bulbSize) theta += angle;
+
+        // convert to cartesian coordinates
+        let { x, y, z } = {
+          x: Math.cos(phi) * Math.cos(theta) * radius,
+          y: Math.cos(phi) * Math.sin(theta) * radius,
+          z: Math.sin(phi) * radius,
+        };
+        stars.set([x, y, z], i * 3);
       }
 
-      return shader;
-    }
-
-    private createPositionBuffer(): WebGLBuffer {
-      const positionBuffer = this.gl.createBuffer()!;
-      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
-      this.gl.bufferData(
-        this.gl.ARRAY_BUFFER,
-        new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-        this.gl.STATIC_DRAW,
-      );
-
-      const positionLocation = this.gl.getAttribLocation(
-        this.program,
-        "position",
-      );
-      this.gl.enableVertexAttribArray(positionLocation);
-      this.gl.vertexAttribPointer(
-        positionLocation,
-        2,
-        this.gl.FLOAT,
-        false,
-        0,
-        0,
-      );
-
-      return positionBuffer;
+      return stars;
     }
 
     private resize() {
       this.canvas.width = this.canvas.clientWidth;
       this.canvas.height = this.canvas.clientHeight;
-      this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
-      this.gl.useProgram(this.program);
-      this.gl.uniform2f(
-        this.resolutionUniformLocation,
-        this.canvas.width,
-        this.canvas.height,
-      );
     }
 
     private render() {
-      this.gl.useProgram(this.program);
-
-      this.gl.uniform1f(
-        this.timeUniformLocation,
-        (Date.now() - this.startTime) / 1000.0,
-      );
+      this.time = this.clock.getElapsedTime();
+      this.delta = this.clock.getDelta();
 
       this.uniforms.mouseLerp.value.x = this.lerp(
         this.uniforms.mouseLerp.value.x,
         this.uniforms.mouse.value.x,
         0.05,
       );
+
       this.uniforms.mouseLerp.value.y = this.lerp(
         this.uniforms.mouseLerp.value.y,
         this.uniforms.mouse.value.y,
         0.05,
       );
 
-      this.gl.uniform2f(
-        this.mouseLerpUniformLocation,
-        this.uniforms.mouseLerp.value.x,
-        this.uniforms.mouseLerp.value.y,
-      );
-      this.gl.uniform2f(
-        this.mouseUniformLocation,
-        this.uniforms.mouse.value.x,
-        this.uniforms.mouse.value.y,
-      );
+      this.uniforms.time.value = this.time;
+      this.uniforms.delta.value = this.delta;
 
-      this.gl.clear(this.gl.COLOR_BUFFER_BIT);
-      this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+      this.galaxyMesh.rotation.z += 0.0002;
+
+      this.composer.render();
       this.requestId = requestAnimationFrame(this.render);
     }
 
@@ -221,8 +254,6 @@ const {} = Astro.props;
       }
       window.removeEventListener("resize", this.resize);
       window.removeEventListener("mousemove", this.handleMouse);
-      this.gl.deleteProgram(this.program);
-      this.gl.deleteBuffer(this.positionBuffer);
     }
   }
 
@@ -231,7 +262,7 @@ const {} = Astro.props;
   });
 </script>
 
-<div class="relative">
+<div class="relative pointer-events-auto">
   <slot />
   <div class={classes.background}>
     <canvas id="background-view" class={classes.canvas}> </canvas>

@@ -32,7 +32,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-secondary py-12 mt-24 border-t border-border">
+    <footer className="relative bg-secondary py-12 mt-24 border-t border-border z-50">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 px-8 text-center">
           <div className="flex items-center space-x-2 mb-4 h-16 mx-auto">

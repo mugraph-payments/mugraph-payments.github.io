@@ -1,5 +1,6 @@
 .background {
-  --z-background: -10;
+  --z-background: -1;
+  /* --z-background: 99; */
 
   position: fixed;
   top: 0;
@@ -15,4 +16,7 @@
   height: 100%;
 
   z-index: var(--z-background);
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
 }
