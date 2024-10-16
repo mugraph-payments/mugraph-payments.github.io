@@ -1,48 +1,47 @@
 export const vertexShader = /* glsl */ `
-	uniform float size;
-  uniform float t;
-  uniform float z;
-  uniform float pixelRatio;
+	uniform float scale;
+  uniform vec2 resolution;
 
   varying vec3 vPosition;
-  varying vec3 mPosition;//modified position
   varying float gas;
 
-  float a,b=0.;
-
   void main() {
-    a=length(position);
-    if(t>0.)b=max(0.,(cos(a/20.-t*.02)-.99)*3./a);
-    if(z>0.)b=max(0.,cos(a/40.-z*.01+2.));
-    mPosition=position*(1.+b*4.);
-    vec4 modelViewPosition = modelViewMatrix * vec4( mPosition, 1.0 );
-    vPosition=mPosition;
+    vPosition=position;
 
-    gas=max(.0,sin(-a/20.));
-    gl_PointSize= pixelRatio*size*(1.+gas*2.)/length(modelViewPosition.xyz);
+    float a = length(position) / scale;
+    gas = max(.0, sin(- a * 5.));
 
+    vec4 modelViewPosition = modelViewMatrix * vec4( vPosition, 1.0 );
+    gl_PointSize = 0.75 + resolution.y * (scale * .01) * (1. + gas * 2.) / length(modelViewPosition.xyz);
     gl_Position = projectionMatrix * modelViewPosition;
   }
 `;
+
 export const fragmentShader = /* glsl */ `
-uniform float z;
+uniform float time;
+uniform float scale;
 
 varying vec3 vPosition;
-varying vec3 mPosition;
 varying float gas;
 
 void main(){
-  float a=distance(mPosition,vPosition);
-  if(a>0.)a=1.;
+  float starCenterDist = distance(gl_PointCoord, vec2(.5));
+  float intensityOffset = 0.;
+  float galaxyCenterDist = length(vPosition) / scale;
 
-  float b=max(.32,.0065*length(vPosition));
+  float gasLook = -(starCenterDist - .5) * 1.2 * gas;
+  float starLook = (1. - gas) / (starCenterDist * 15.);
+  float texture = starLook + gasLook;
 
-  float c=distance(gl_PointCoord,vec2(.5));
-  float starlook=-(c-.5)*1.2*gas;
-  float gaslook=(1.-gas)/(c*10.);
-  float texture=starlook+gaslook;
+  vec3 blue = vec3(137. / 255., 180.0 / 255., 250.0 / 255.);
+  vec3 mauve = vec3(203. / 255., 166. / 255., 247. / 255.);
+  vec3 color = vec3(1.);
+  color *= mix(
+    blue,
+    mauve,
+    galaxyCenterDist - intensityOffset
+  );
 
-  gl_FragColor=vec4(.32,.28,b,1.)*texture*(1.-a*.35);
-  if(z>0.)gl_FragColor*=cos(1.57*z/322.)*(1.-.001*length(mPosition));
+  gl_FragColor= vec4(color, 1.0) * texture;
 }
 `;
