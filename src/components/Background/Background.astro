@@ -13,6 +13,7 @@ const {} = Astro.props;
     vertexShader as galaxyVertexShader,
   } from "./shaders/galaxy";
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+  import { throttle } from "~/utils/utils";
 
   class HeroBackground {
     private scale = 100;
@@ -25,6 +26,7 @@ const {} = Astro.props;
     private delta = 0;
     private camera: THREE.PerspectiveCamera;
     private galaxyMesh: THREE.Points;
+    private throttledResizeHandler: () => void;
 
     private settings = {
       antialias: true,
@@ -84,11 +86,11 @@ const {} = Astro.props;
       this.renderScene = new RenderPass(this.scene, this.camera);
       this.composer.addPass(this.renderScene);
 
-      this.resize = this.resize.bind(this);
+      this.throttledResizeHandler = throttle(this.resize.bind(this), 100);
       this.render = this.render.bind(this);
       this.handleMouse = this.handleMouse.bind(this);
 
-      window.addEventListener("resize", this.resize);
+      window.addEventListener("resize", this.throttledResizeHandler);
       window.addEventListener("mousemove", this.handleMouse);
 
       let galaxyMaterial = new THREE.ShaderMaterial({
@@ -197,15 +199,13 @@ const {} = Astro.props;
     }
 
     private resize() {
-      const width = this.canvas.clientWidth;
-      const height = this.canvas.clientHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
-      this.uniforms.resolution.value = new THREE.Vector2(
-        window.innerWidth,
-        window.innerHeight,
-      );
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-      this.composer.setSize(window.innerWidth, window.innerHeight);
+      this.uniforms.resolution.value = new THREE.Vector2(width, height);
+
+      this.renderer.setSize(width, height);
+      this.composer.setSize(width, height);
 
       this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
