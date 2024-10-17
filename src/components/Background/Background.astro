@@ -13,7 +13,11 @@ const {} = Astro.props;
     vertexShader as galaxyVertexShader,
   } from "./shaders/galaxy";
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-  import { throttle } from "~/utils/utils";
+  import {
+    throttle,
+    easeInOutQuad,
+  } from "~/utils/utils";
+  import { lerp } from "three/src/math/MathUtils.js";
 
   class HeroBackground {
     private scale = 100;
@@ -27,6 +31,7 @@ const {} = Astro.props;
     private camera: THREE.PerspectiveCamera;
     private galaxyMesh: THREE.Points;
     private throttledResizeHandler: () => void;
+    private currentScroll = window.scrollY;
 
     private settings = {
       antialias: true,
@@ -127,23 +132,23 @@ const {} = Astro.props;
       this.render();
     }
 
-
     private handleEvents() {
       this.resize();
+      this.handleScroll();
 
       window.addEventListener("resize", this.throttledResizeHandler);
       window.addEventListener("mousemove", this.handleMouse);
-      window.addEventListener("scroll", this.handleScroll.bind(this))
+      window.addEventListener("scroll", this.handleScroll.bind(this));
     }
 
     private handleScroll() {
-      const footer = document.querySelector('footer');
+      const footer = document.querySelector("footer");
       const footerHeight = footer?.clientHeight ?? 0;
       const scrollY = window.scrollY;
-      const zoomFactor = 75;
-      const maxScroll = document.body.scrollHeight - window.innerHeight - footerHeight;
+      const maxScroll =
+        document.body.scrollHeight - window.innerHeight - footerHeight;
       const normalizedScroll = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-      this.camera.position.z = this.settings.cameraPosition[2] - normalizedScroll * zoomFactor;
+      this.currentScroll = normalizedScroll;
     }
 
     /* Adapted from https://codepen.io/Astrak/pen/BoBWPB for now */
@@ -234,13 +239,13 @@ const {} = Astro.props;
       this.time = this.clock.getElapsedTime();
       this.delta = this.clock.getDelta();
 
-      this.uniforms.mouseLerp.value.x = this.lerp(
+      this.uniforms.mouseLerp.value.x = lerp(
         this.uniforms.mouseLerp.value.x,
         this.uniforms.mouse.value.x,
         0.05,
       );
 
-      this.uniforms.mouseLerp.value.y = this.lerp(
+      this.uniforms.mouseLerp.value.y = lerp(
         this.uniforms.mouseLerp.value.y,
         this.uniforms.mouse.value.y,
         0.05,
@@ -249,10 +254,19 @@ const {} = Astro.props;
       this.uniforms.time.value = this.time;
       this.uniforms.delta.value = this.delta;
 
-      this.galaxyMesh.rotation.z += 0.000075;
+      this.galaxyMesh.rotation.z += 0.000075 + this.currentScroll / 10000;
+
+      this.updateCameraPosition();
 
       this.composer.render();
       this.requestId = requestAnimationFrame(this.render);
+    }
+
+    private updateCameraPosition() {
+      const zoomFactor = this.scale * 0.5;
+      this.camera.position.z =
+        this.settings.cameraPosition[2] -
+        easeInOutQuad(this.currentScroll) * zoomFactor;
     }
 
     private handleMouse(event: MouseEvent) {
@@ -262,16 +276,13 @@ const {} = Astro.props;
         (event.clientY - window.innerHeight / 2) * 0.01;
     }
 
-    private lerp(start: number, end: number, amt: number): number {
-      return (1 - amt) * start + amt * end;
-    }
-
     public destroy() {
       if (this.requestId) {
         cancelAnimationFrame(this.requestId);
       }
-      window.removeEventListener("resize", this.resize);
+      window.removeEventListener("resize", this.throttledResizeHandler);
       window.removeEventListener("mousemove", this.handleMouse);
+      window.removeEventListener("scroll", this.handleScroll);
     }
   }
 
