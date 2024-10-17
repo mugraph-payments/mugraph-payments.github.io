@@ -89,9 +89,7 @@ const {} = Astro.props;
       this.throttledResizeHandler = throttle(this.resize.bind(this), 100);
       this.render = this.render.bind(this);
       this.handleMouse = this.handleMouse.bind(this);
-
-      window.addEventListener("resize", this.throttledResizeHandler);
-      window.addEventListener("mousemove", this.handleMouse);
+      this.handleScroll = this.handleScroll.bind(this);
 
       let galaxyMaterial = new THREE.ShaderMaterial({
         vertexShader: galaxyVertexShader,
@@ -125,8 +123,27 @@ const {} = Astro.props;
         this.scene.add(gridHelper);
       }
 
-      this.resize();
+      this.handleEvents();
       this.render();
+    }
+
+
+    private handleEvents() {
+      this.resize();
+
+      window.addEventListener("resize", this.throttledResizeHandler);
+      window.addEventListener("mousemove", this.handleMouse);
+      window.addEventListener("scroll", this.handleScroll.bind(this))
+    }
+
+    private handleScroll() {
+      const footer = document.querySelector('footer');
+      const footerHeight = footer?.clientHeight ?? 0;
+      const scrollY = window.scrollY;
+      const zoomFactor = 75;
+      const maxScroll = document.body.scrollHeight - window.innerHeight - footerHeight;
+      const normalizedScroll = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+      this.camera.position.z = this.settings.cameraPosition[2] - normalizedScroll * zoomFactor;
     }
 
     /* Adapted from https://codepen.io/Astrak/pen/BoBWPB for now */
