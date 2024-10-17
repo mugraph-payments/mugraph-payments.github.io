@@ -13,10 +13,7 @@ const {} = Astro.props;
     vertexShader as galaxyVertexShader,
   } from "./shaders/galaxy";
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-  import {
-    throttle,
-    easeInOutQuad,
-  } from "~/utils/utils";
+  import { throttle, easeInOutQuad } from "~/utils/utils";
   import { lerp } from "three/src/math/MathUtils.js";
 
   class HeroBackground {

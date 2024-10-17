@@ -1,0 +1,19 @@
+.iconContainer {
+  @apply p-2 text-heading;
+}
+
+@keyframes FillIn {
+  0% {
+    stroke-dasharray: 0, 30;
+  }
+  50% {
+    stroke-dasharray: 30, 0;
+  }
+  100% {
+    stroke-dasharray: 0, 30;
+  }
+}
+
+.animateFill {
+  animation: FillIn 2s;
+}

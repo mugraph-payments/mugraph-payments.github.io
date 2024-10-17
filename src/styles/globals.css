@@ -63,7 +63,8 @@
     /* Dark is the only theme for now */
     --background: var(--theme-crust);
     --foreground: var(--theme-text);
-    --heading: 232, 97%, 85%;
+    /* --heading: 232, 97%, 85%; */
+    --heading: var(--theme-blue);
     --card: var(--theme-base);
     --card-foreground: var(--theme-text);
     --popover: var(--theme-crust);
@@ -74,7 +75,7 @@
     --secondary-foreground: var(--theme-text);
     --muted: var(--theme-surface0);
     --muted-foreground: var(--theme-text);
-    --accent: var(--theme-mauve);
+    --accent: var(--theme-blue);
     --accent-foreground: var(--theme-text);
     --destructive: var(--theme-red);
     --destructive-foreground: var(--background);

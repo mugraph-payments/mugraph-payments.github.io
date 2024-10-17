@@ -2,11 +2,14 @@
 import { Button } from "~/components/Button/Button";
 import Layout from "~/layouts/Layout.astro";
 import { Card, CardContent, CardHeader } from "~/components/Card/Card";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import ZeroKnowledgeIcon from "~/components/icons/ZkIcon";
+import ScaleIcon from "~/components/icons/ScaleIcon";
+import SelfCustodyIcon from "~/components/icons/SelfCustodyIcon";
+import CrossChainIcon from "~/components/icons/CrossChainIcon";
 ---
 
 <Layout title="Mugraph">
-  <main class="px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-24 pt-12">
+  <main class="px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-16 pt-12">
     <section class="text-center h-[40vh] flex flex-col justify-center">
       <h1 class="text-5xl font-bold mb-4 text-theme-blue">
         Fast Private Payments
@@ -21,47 +24,57 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
       </div>
     </section>
 
-    <section class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {
-        [
+    <section>
+      <Card>
+        <CardHeader />
+        <CardContent className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {
-            title: "Zero Knowledge",
-            description:
-              "Employs advanced Zero-Knowledge Proofs (ZKPs) to ensure transaction privacy and confidentiality.",
-          },
-          {
-            title: "Scalable",
-            description:
-              "Achieves high scalability through a modified version of the Hydra Tail protocol, enabling fast and efficient transactions.",
-          },
-          {
-            title: "Self-Custody",
-            description:
-              "Ensures users maintain full control over their funds at all times, enhancing security and trust in the system.",
-          },
-          {
-            title: "Cross-Chain Compatible",
-            description:
-              "Designed with cross-chain interoperability in mind, allowing for seamless transactions across different blockchain networks.",
-          },
-        ].map((feature) => (
-          <div class="text-center">
-            <div class="w-12 h-12 bg-foreground rounded-full mx-auto mb-4 flex items-center justify-center">
-              <ExclamationCircleIcon className="w-8 h-8 text-background" />
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-heading">
-              {feature.title}
-            </h3>
-            <p>{feature.description}</p>
-          </div>
-        ))
-      }
+            [
+              {
+                title: "Zero Knowledge",
+                description:
+                  "Employs advanced Zero-Knowledge Proofs (ZKPs) to ensure transaction privacy and confidentiality.",
+                icon: <ZeroKnowledgeIcon />,
+              },
+              {
+                title: "Scalable",
+                description:
+                  "Achieves high scalability through a modified version of the Hydra Tail protocol, enabling fast and efficient transactions.",
+                icon: <ScaleIcon />,
+              },
+              {
+                title: "Self-Custody",
+                description:
+                  "Ensures users maintain full control over their funds at all times, enhancing security and trust in the system.",
+                icon: <SelfCustodyIcon />,
+              },
+              {
+                title: "Cross-Chain Compatible",
+                description:
+                  "Designed with cross-chain interoperability in mind, allowing for seamless transactions across different blockchain networks.",
+                icon: <CrossChainIcon />,
+              },
+            ].map((feature) => (
+              <div class="text-center">
+                <div class="w-16 h-16 bg-theme-surface0 rounded-md mx-auto mb-4 flex items-center justify-center">
+                  {/* <ExclamationCircleIcon className="w-8 h-8 text-background" /> */}
+                  {feature.icon}
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-heading">
+                  {feature.title}
+                </h3>
+                <p>{feature.description}</p>
+              </div>
+            ))
+          }</CardContent
+        >
+      </Card>
     </section>
 
     <section>
       <Card>
         <CardHeader />
-        <CardContent>
+        <CardContent className="mb-3">
           <div
             class="flex flex-col md:flex-row justify-center items-center gap-4 text-foreground"
           >
@@ -87,26 +100,30 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
     </section>
 
     <section class="mx-auto">
-      <h2 class="text-3xl font-bold mb-12 text-center text-heading">Roadmap</h2>
-      <div class="space-y-8">
-        {
-          [1, 2, 3, 4].map((milestone) => (
-            <div class="flex flex-col md:flex-row items-center gap-4">
-              <div class="contents">
-                <h3 class="text-xl font-semibold whitespace-nowrap">
-                  Milestone {milestone}
-                </h3>
+      <Card>
+        <CardHeader className="text-3xl font-bold text-center text-heading"
+          >Roadmap</CardHeader
+        >
+        <CardContent className="space-y-8 mb-3">
+          {
+            [1, 2, 3, 4].map((milestone) => (
+              <div class="flex flex-col md:flex-row items-center gap-4">
+                <div class="contents">
+                  <h3 class="text-xl font-semibold whitespace-nowrap">
+                    Milestone {milestone}
+                  </h3>
 
-                <span class="h-1 md:h-8 w-full max-w-32 md:w-4 md:border-l border-muted-foreground border-b md:border-b-0" />
+                  <span class="h-1 md:h-8 w-full max-w-32 md:w-4 md:border-l border-muted-foreground border-b md:border-b-0" />
+                </div>
+                <p>
+                  Rhoncus dui feugiat varius augue praesent gravida nec. Sed
+                  arcu tristique fames suscipit, arcu lacinia nec lorem
+                </p>
               </div>
-              <p>
-                Rhoncus dui feugiat varius augue praesent gravida nec. Sed arcu
-                tristique fames suscipit, arcu lacinia nec lorem
-              </p>
-            </div>
-          ))
-        }
-      </div>
+            ))
+          }
+        </CardContent>
+      </Card>
     </section>
   </main>
 </Layout>
