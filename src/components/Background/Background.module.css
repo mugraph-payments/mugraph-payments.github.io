@@ -1,6 +1,5 @@
 .background {
   --z-background: -1;
-  /* --z-background: 99; */
 
   position: fixed;
   top: 0;

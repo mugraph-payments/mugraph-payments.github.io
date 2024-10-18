@@ -283,8 +283,11 @@ const {} = Astro.props;
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    new HeroBackground("background-view");
+  document.addEventListener("astro:page-load", () => {
+    const canvas = document.getElementById("background-view");
+    if (canvas) {
+      new HeroBackground("background-view");
+    }
   });
 </script>
 

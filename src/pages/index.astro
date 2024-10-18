@@ -9,8 +9,12 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
 ---
 
 <Layout title="Mugraph">
-  <main class="px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-16 pt-12">
-    <section class="text-center h-[40vh] flex flex-col justify-center">
+  <main
+    class="px-8 md:px-16 max-w-6xl mx-auto flex flex-col gap-16 pt-12 relative z-10"
+  >
+    <section
+      class="text-center h-[40vh] flex flex-col justify-center animateOnView fadeIn"
+    >
       <h1 class="text-5xl font-bold mb-4 text-theme-blue">
         Fast Private Payments
       </h1>
@@ -24,7 +28,7 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
       </div>
     </section>
 
-    <section>
+    <section class="animateOnView fadeIn">
       <Card>
         <CardHeader />
         <CardContent className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 ">
@@ -54,10 +58,12 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
                   "Designed with cross-chain interoperability in mind, allowing for seamless transactions across different blockchain networks.",
                 icon: <CrossChainIcon />,
               },
-            ].map((feature) => (
-              <div class="text-center">
+            ].map((feature, index) => (
+              <div
+                class="text-center animateOnView fadeIn"
+                style={{ transitionDelay: `${0.1 * (index + 1)}s` }}
+              >
                 <div class="w-16 h-16 bg-theme-surface0 rounded-md mx-auto mb-4 flex items-center justify-center">
-                  {/* <ExclamationCircleIcon className="w-8 h-8 text-background" /> */}
                   {feature.icon}
                 </div>
                 <h3 class="text-xl font-semibold mb-2 text-heading">
@@ -71,7 +77,7 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
       </Card>
     </section>
 
-    <section>
+    <section class="animateOnView fadeIn">
       <Card>
         <CardHeader />
         <CardContent className="mb-3">
@@ -99,15 +105,18 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
       </Card>
     </section>
 
-    <section class="mx-auto">
+    <section class="mx-auto animateOnView fadeIn">
       <Card>
         <CardHeader className="text-3xl font-bold text-center text-heading"
           >Roadmap</CardHeader
         >
         <CardContent className="space-y-8 mb-3">
           {
-            [1, 2, 3, 4].map((milestone) => (
-              <div class="flex flex-col md:flex-row items-center gap-4">
+            [1, 2, 3, 4].map((milestone, index) => (
+              <div
+                class="flex flex-col md:flex-row items-center gap-4 animateOnView fadeIn"
+                style={{ transitionDelay: `${0.1 * (index + 1)}s` }}
+              >
                 <div class="contents">
                   <h3 class="text-xl font-semibold whitespace-nowrap">
                     Milestone {milestone}
