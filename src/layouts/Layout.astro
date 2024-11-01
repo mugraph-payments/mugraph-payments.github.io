@@ -1,4 +1,5 @@
 ---
+import Background from "~/components/Background/Background.astro";
 import BaseHead from "~/components/BaseHead.astro";
 import { Footer } from "~/components/Footer/Footer";
 import { Navbar } from "~/components/Navbar/Navbar";
@@ -7,19 +8,40 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "~/consts";
 interface Props {
   title?: string;
   description?: string;
+  background?: boolean;
 }
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  background = true,
+} = Astro.props;
 ---
 
 <!doctype html>
+<script>
+  import ViewObserver from "~/utils/ViewObserver";
+
+  const viewObserver = new ViewObserver();
+  document.addEventListener("astro:page-load", () => {
+    viewObserver.observe();
+  });
+</script>
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
   </head>
   <body class="dark">
     <Navbar client:load />
-    <slot />
+    {
+      background ? (
+        <Background>
+          <slot />
+        </Background>
+      ) : (
+        <slot />
+      )
+    }
     <Footer />
   </body>
 </html>

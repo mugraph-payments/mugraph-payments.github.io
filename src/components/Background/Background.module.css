@@ -1,0 +1,22 @@
+.background {
+  --z-background: -1;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-background);
+  @apply bg-background;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.8;
+  z-index: var(--z-background);
+  /* cursor: grab; */
+  /* cursor: -webkit-grab; */
+  /* cursor: -moz-grab; */
+}

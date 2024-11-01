@@ -88,17 +88,28 @@ export default function DrawerMenu({ menu }: DrawerMenuProps) {
                               {section.title}
                             </label>
                             <ul className="flex w-full flex-col">
-                              {section.links.map((item) => (
+                              {section.links.map(({ path, newTab, title }) => (
                                 <li
                                   className="py-2 text-xltransition-colors transition-transform duration-300 hover:translate-x-[10px] w-max"
-                                  key={item.title}
+                                  key={title}
                                 >
                                   <Link
-                                    href={item.path}
-                                    onClick={closeMobileMenu}
-                                    newTab={!!item.newTab}
+                                    href={path}
+                                    newTab={!!newTab}
+                                    className={
+                                      path === "#" ? "pointer-events-none" : ""
+                                    }
                                   >
-                                    {item.title}
+                                    {path === "#" ? (
+                                      <>
+                                        <span className="text-muted">
+                                          {title}
+                                        </span>
+                                        &nbsp;<span>Soon!</span>
+                                      </>
+                                    ) : (
+                                      title
+                                    )}
                                   </Link>
                                 </li>
                               ))}
