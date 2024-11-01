@@ -28,6 +28,7 @@
 
 @layer base {
   :root {
+    --font-base: 1.2rem;
     --radius: 0.5rem;
 
     /* Mocha palette */

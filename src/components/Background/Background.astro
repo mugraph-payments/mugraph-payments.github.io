@@ -33,13 +33,14 @@ const {} = Astro.props;
     private settings = {
       antialias: true,
       cameraPosition: [0, this.scale * -0.75, this.scale * 1.5],
+      galaxyPosition: new THREE.Vector3(100, 0, 100),
       aspect: window.innerWidth / window.innerHeight,
       near: 0.1,
       far: 1000,
       fov: 75,
       zoom: 1,
       gridHelper: false,
-      orbitControls: true,
+      orbitControls: false,
       autoRotate: false,
     };
 
@@ -110,6 +111,7 @@ const {} = Astro.props;
       );
 
       this.galaxyMesh = new THREE.Points(galaxyGeometry, galaxyMaterial);
+      this.galaxyMesh.position.copy(this.settings.galaxyPosition);
       this.scene.add(this.galaxyMesh);
 
       let orbitControls = new OrbitControls(
@@ -261,8 +263,11 @@ const {} = Astro.props;
 
     private updateCameraPosition() {
       const zoomFactor = this.scale * 0.5;
+      this.camera.position.x =
+        this.settings.cameraPosition[0] +
+        easeInOutQuad(this.currentScroll) * zoomFactor;
       this.camera.position.z =
-        this.settings.cameraPosition[2] -
+        this.settings.cameraPosition[2] +
         easeInOutQuad(this.currentScroll) * zoomFactor;
     }
 

@@ -42,7 +42,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
-    "tailwind-merge": "^2.5.2"
+    "tailwind-merge": "^2.5.2",
+    "tweakpane": "^4.0.4"
   },
   "packageManager": "yarn@1.22.22"
 }

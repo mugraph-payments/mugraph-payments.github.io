@@ -1,3 +1,6 @@
+// Modified code based on work by Atrahasis
+// (https://codepen.io/Astrak/pen/BoBWPB), licensed under the MIT License.
+
 export const vertexShader = /* glsl */ `
 	uniform float scale;
   uniform vec2 resolution;
