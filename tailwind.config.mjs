@@ -13,7 +13,7 @@ export default {
     extend: {
       fontSize: {
         // base: "var(--font-size-base)"
-        base: "18px",
+        base: "16px",
       },
       colors: {
         border: "hsl(var(--border))",

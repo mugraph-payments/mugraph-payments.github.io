@@ -2,10 +2,11 @@
 import { Button } from "~/components/Button/Button";
 import Layout from "~/layouts/Layout.astro";
 import { Card, CardContent, CardHeader } from "~/components/Card/Card";
-import ZeroKnowledgeIcon from "~/components/icons/ZkIcon";
-import ScaleIcon from "~/components/icons/ScaleIcon";
-import SelfCustodyIcon from "~/components/icons/SelfCustodyIcon";
-import CrossChainIcon from "~/components/icons/CrossChainIcon";
+// import ZeroKnowledgeIcon from "~/components/icons/ZkIcon";
+// import ScaleIcon from "~/components/icons/ScaleIcon";
+// import SelfCustodyIcon from "~/components/icons/SelfCustodyIcon";
+// import CrossChainIcon from "~/components/icons/CrossChainIcon";
+import { Link } from "~/components/Link/Link";
 ---
 
 <Layout title="Mugraph">
@@ -15,20 +16,25 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
     <section
       class="text-center h-[40vh] flex flex-col justify-center animateOnView fadeIn"
     >
-      <h1 class="text-6xl font-bold mb-4 text-theme-blue">
+      <h1 class="text-5xl lg:text-6xl font-bold mb-4 text-theme-blue">
         Fast Private Payments
       </h1>
-      <p class="mb-8 max-w-2xl mx-auto text-xl">
+      <p class="mb-8 max-w-2xl mx-auto text-lg">
         μgraph is an open-source protocol built on Cardano, designed to address
         key challenges in cryptocurrency adoption for everyday transactions
       </p>
       <div class="flex justify-center space-x-4">
-        <Button variant="inverse"> Get Started </Button>
-        <Button variant="outline"> Contribute </Button>
+        <Link
+          className="text-inherit hover:text-inherit"
+          newTab
+          href="https://github.com/mugraph-payments/mugraph"
+          ><Button variant="inverse">Get Started </Button></Link
+        >
+        <!-- <Button variant="outline"> Contribute </Button> -->
       </div>
     </section>
 
-    <section class="animateOnView fadeIn">
+    <!-- <section class="animateOnView fadeIn">
       <Card>
         <CardHeader />
         <CardContent className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -75,7 +81,7 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
           }</CardContent
         >
       </Card>
-    </section>
+    </section> -->
 
     <section class="animateOnView fadeIn">
       <Card>
@@ -98,14 +104,16 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
                 who value financial freedom and confidentiality in an
                 increasingly digital economy.
               </p>
-              <Button className="w-full md:w-max"> Learn More </Button>
+              <Link href="/blog/this-week-in-mugraph-01/">
+                <Button className="w-full md:w-max"> Learn More </Button>
+              </Link>
             </div>
           </div>
         </CardContent>
       </Card>
     </section>
 
-    <section class="mx-auto animateOnView fadeIn">
+    <!-- <section class="mx-auto animateOnView fadeIn">
       <Card>
         <CardHeader className="text-3xl font-bold text-center text-heading"
           >Roadmap</CardHeader
@@ -133,6 +141,6 @@ import CrossChainIcon from "~/components/icons/CrossChainIcon";
           }
         </CardContent>
       </Card>
-    </section>
+    </section> -->
   </main>
 </Layout>

@@ -28,20 +28,16 @@ export function Navbar() {
       links: [
         {
           title: "Discord",
-          path: "#",
+          newTab: true,
+          path: "https://discord.gg/UQbXnKZxfq",
         },
         {
           title: "Github",
-          path: "#",
+          newTab: true,
+          path: "https://github.com/mugraph-payments/mugraph",
         },
-        {
-          title: "Nostr",
-          path: "#",
-        },
-        {
-          title: "X",
-          path: "#",
-        },
+        // { title: "Nostr", path: "#" },
+        { title: "X", newTab: true, path: "https://x.com/mugraph_ada" },
       ],
     },
   ];
@@ -59,12 +55,12 @@ export function Navbar() {
         <div className={classes.links_container}>
           <Link
             href="https://github.com/mugraph-payments/mugraph"
-            className={``}
+            className={`text-lg`}
           >
             Github
           </Link>
 
-          <Link href="https://discord.gg/VRJremtk" className={``}>
+          <Link href="https://discord.gg/VRJremtk" className={`text-lg`}>
             Discord
           </Link>
         </div>

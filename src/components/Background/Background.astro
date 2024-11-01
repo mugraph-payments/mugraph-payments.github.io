@@ -255,14 +255,14 @@ const {} = Astro.props;
 
       this.galaxyMesh.rotation.z += 0.000075 + this.currentScroll / 10000;
 
-      this.updateCameraPosition();
+      // this.updateCameraPosition();
 
       this.composer.render();
       this.requestId = requestAnimationFrame(this.render);
     }
 
     private updateCameraPosition() {
-      const zoomFactor = this.scale * 0.5;
+      const zoomFactor = this.scale * 0.05;
       this.camera.position.x =
         this.settings.cameraPosition[0] +
         easeInOutQuad(this.currentScroll) * zoomFactor;

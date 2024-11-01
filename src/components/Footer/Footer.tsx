@@ -15,20 +15,28 @@ export function Footer() {
     {
       title: "Community",
       links: [
-        { title: "Discord", path: "#" },
-        { title: "Github", path: "#" },
-        { title: "Nostr", path: "#" },
-        { title: "X", path: "#" },
+        {
+          title: "Discord",
+          newTab: true,
+          path: "https://discord.gg/UQbXnKZxfq",
+        },
+        {
+          title: "Github",
+          newTab: true,
+          path: "https://github.com/mugraph-payments/mugraph",
+        },
+        // { title: "Nostr", path: "#" },
+        { title: "X", newTab: true, path: "https://x.com/mugraph_ada" },
       ],
     },
-    {
-      title: "Column 3",
-      links: [
-        { title: "Link", path: "#" },
-        { title: "Link", path: "#" },
-        { title: "Link", path: "#" },
-      ],
-    },
+    // {
+    //   title: "Column 3",
+    //   links: [
+    //     { title: "Link", path: "#" },
+    //     { title: "Link", path: "#" },
+    //     { title: "Link", path: "#" },
+    //   ],
+    // },
   ];
 
   return (
@@ -45,8 +53,19 @@ export function Footer() {
                 <ul className="space-y-2">
                   {links.map(({ title, path, newTab }, index) => (
                     <li key={index}>
-                      <Link href={path} newTab={!!newTab}>
-                        {title}
+                      <Link
+                        href={path}
+                        newTab={!!newTab}
+                        className={path === "#" ? "pointer-events-none" : ""}
+                      >
+                        {path === "#" ? (
+                          <>
+                            <span className="text-muted">{title}</span>&nbsp;
+                            <span>Soon!</span>
+                          </>
+                        ) : (
+                          title
+                        )}
                       </Link>
                     </li>
                   ))}
